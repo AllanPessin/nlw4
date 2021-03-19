@@ -1,11 +1,11 @@
-import { Request, Response } from 'express'
-import { getRepository, ReturningStatementNotSupportedError } from 'typeorm';
-import { User } from '../models/user';
+import { Request, Response } from 'express';
+import { getCustomRepository } from 'typeorm';
+import { UserRepository } from '../repositories/UserRepository';
 
 class UserController {
  async create(request: Request, response: Response){
   const {name, email} = request.body;
-  const userRepository = getRepository(User);
+  const userRepository = getCustomRepository(UserRepository);
   const userAlreadyExist = await userRepository.findOne({
     email
   });
